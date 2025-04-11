@@ -10,5 +10,9 @@ class VowelRemover:
         while i < len(self.text):
             if self.text[i].lower() in self.vowels:
                 self.text = self.text[:i] + self.text[i+1:]
-            i += 1
+            else:
+                i += 1
         return self.text
+
+remover = VowelRemover("aeiou")
+print(remover.remove_vowels())
