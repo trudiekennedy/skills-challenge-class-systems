@@ -13,6 +13,3 @@ class VowelRemover:
             else:
                 i += 1
         return self.text
-
-remover = VowelRemover("aeiou")
-print(remover.remove_vowels())
