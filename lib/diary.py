@@ -16,19 +16,19 @@ class Diary:
     def reading_time(self, wpm):
         if self._entries == []:
             raise Exception("No entries added yet.")
-        word_count = self.count_words()
-        return ceil(word_count / wpm)
+
+        return ceil(self.count_words()/ wpm)
 
     def find_best_entry_for_reading_time(self, wpm, minutes):
         if self._entries == []:
             raise Exception("No entries added yet.")
         words_user_can_read = wpm * minutes
-        most_readable = None
-        longest_found_so_far = 0
 
-        for entry in self._entries:
-            if entry.count_words() <= words_user_can_read:
-                if entry.count_words() > longest_found_so_far:
-                    most_readable = entry
-                    longest_found_so_far = entry.count_words()
-        return most_readable
+        # finds entries where word count is less than or equal to what the use can read
+        readable_entries = [entry for entry in self._entries if entry.count_words() <= words_user_can_read]
+
+        if not readable_entries:
+            return None
+        
+        # looks for the entry with the highest word count amongst the readable_entries
+        return max(readable_entries, key=lambda entry: entry.count_words())
